@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Multi Livestream Marketblast</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    body {
+      background: linear-gradient(135deg, #0f0f0f, #1a1a1a);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 20px;
+      padding: 20px;
+    }
+
+    .stream-card {
+      position: relative;
+      width: 400px;
+      aspect-ratio: 16/9;
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 0 30px rgba(255,255,255,0.1);
+      color: white;
+      transition: 0.4s;
+      background: #000;
+    }
+
+    .stream-card:hover {
+      transform: scale(1.02);
+      box-shadow: 0 0 40px rgba(255,255,255,0.2);
+    }
+
+    video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to bottom, rgba(0,0,0,0.2), rgba(0,0,0,0.8));
+    }
+
+    .live-info {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      display: flex;
+      align-items: center;
+      background: rgba(0, 0, 0, 0.6);
+      padding: 6px 12px;
+      border-radius: 50px;
+      backdrop-filter: blur(6px);
+    }
+
+    .live-info img {
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      margin-right: 8px;
+    }
+
+    .live-badge {
+      font-size: 12px;
+      font-weight: bold;
+      padding: 3px 10px;
+      border-radius: 20px;
+      margin-right: 10px;
+      animation: pulse 1.5s infinite;
+    }
+
+    @keyframes pulse {
+      0% { box-shadow: 0 0 5px rgba(255, 255, 255, 0.5); }
+      50% { box-shadow: 0 0 15px rgba(255, 255, 255, 0.9); }
+      100% { box-shadow: 0 0 5px rgba(255, 255, 255, 0.5); }
+    }
+
+    .viewer-count {
+      display: flex;
+      align-items: center;
+      font-size: 13px;
+    }
+
+    .viewer-count i {
+      margin-right: 4px;
+    }
+
+    .content {
+      position: absolute;
+      bottom: 10px;
+      left: 15px;
+      font-size: 10px;
+      font-weight: 600;
+      text-shadow: 0 0 8px rgba(0,0,0,0.8);
+    }
+
+    /* Tema khusus platform */
+    .instagram .live-badge { background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888); }
+    .facebook .live-badge { background: #1877f2; }
+    .tiktok .live-badge { background: linear-gradient(45deg, #69c9d0, #ee1d52); }
+    .shopee .live-badge { background: #ff5722; }
+
+h1 {
+  color: #fff;
+}
+  </style>
+</head>
+<body>
+  <!-- Shopee -->
+  <div class="stream-card tiktok">
+    <video src="" autoplay muted loop playsinline></video>
+    <div class="overlay"></div>
+    <div class="live-info">
+      <img src="tiktok.png" alt="Shopee">
+      <div class="live-badge">LIVE</div>
+      <div class="viewer-count"><i class="fa fa-eye"></i> <span id="sp-view">waiting content</span></div>
+    </div>
+    <div class="content">BG LIVE</div>
+  </div>
+  
+    <!-- TikTok -->
+  <div class="stream-card tiktok">
+    <video src="" autoplay muted loop playsinline></video>
+    <div class="overlay"></div>
+    <div class="live-info">
+      <img src="tiktok.png" alt="TikTok">
+      <div class="live-badge">LIVE</div>
+      <div class="viewer-count"><i class="fa fa-eye"></i> <span id="tt-view">waiting content</span></div>
+    </div>
+    <div class="content">BG LIVE</div>
+  </div>
+
+  <!-- Instagram -->
+  <div class="stream-card tiktok">
+    <video src="" autoplay muted loop playsinline></video>
+    <div class="overlay"></div>
+    <div class="live-info">
+      <img src="tiktok.png" alt="Instagram">
+      <div class="live-badge">LIVE</div>
+      <div class="viewer-count"><i class="fa fa-eye"></i> <span id="insta-view">waiting content</span></div>
+    </div>
+    <div class="content">BG LIVE</div>
+  </div>
+
+  <!-- Facebook -->
+  <div class="stream-card tiktok">
+    <video src="" autoplay muted loop playsinline></video>
+    <div class="overlay"></div>
+    <div class="live-info">
+      <img src="tiktok.png" alt="Facebook">
+      <div class="live-badge">LIVE</div>
+      <div class="viewer-count"><i class="fa fa-eye"></i> <span id="fb-view">waiting content</span></div>
+    </div>
+    <div class="content">BG LIVE</div>
+  </div>
+
+<h1>MULTI SCREEN LIVE</h1>
+
+  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+
+  <script>
+    // Simulasi naik-turun jumlah penonton tiap platform
+    const platforms = [
+      { id: 'insta-view', viewers:  },
+      { id: 'fb-view', viewers:  },
+      { id: 'tt-view', viewers:  },
+      { id: 'sp-view', viewers:  }
+    ];
+
+    setInterval(() => {
+      platforms.forEach(p => {
+        const change = Math.floor(Math.random() * 20 - 10);
+        p.viewers = Math.max(100, p.viewers + change);
+        const el = document.getElementById(p.id);
+        if (p.viewers >= 1000) {
+          el.textContent = (p.viewers / 1000).toFixed(1) + 'K';
+        } else {
+          el.textContent = p.viewers;
+        }
+      });
+    }, 2000);
+  </script>
+</body>
+</html>
